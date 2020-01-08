@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "./images/matthew-bennett-78hTqvjYMS4-unsplash.jpg"
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button"
 import Input from '@material-ui/core/Input';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -293,7 +293,7 @@ class Questionnaire extends React.Component  {
                 <div className={"App"}>
                         <Element className="element" id="scroll-container" style={{
                             border: 'solid gainsboro',
-                            backgroundColor: 'white',
+                            backgroundColor: 'rgba(0,0.2,0.2,0.3)',
                             marginTop: '50px',
                             position: 'fixed',
                             overflow: 'scroll',
@@ -326,6 +326,7 @@ class Questionnaire extends React.Component  {
                                                                         value= {q.id.toString() + option.no.toString()} control={<Radio/>}
                                                                         label={option.type === 'Other' ?
                                                                             <Input
+                                                                                style = {{color:'whiteSmoke'}}
                                                                                 value = {option.content}
                                                                                 id={q.id}
                                                                                 readOnly = {!option.chosen}
@@ -345,12 +346,14 @@ class Questionnaire extends React.Component  {
                                                 :
                                                 <div className = {"required-field"} style={{fontSize: '17px', marginRight: "200px", marginBottom: '10px'}}>{'Question # ' + (index + 1)}
                                                     <div style={{marginLeft: '240px', marginBottom: '10px', marginTop: '10px', textAlign: 'center', width: '300px'}}>
-                                                        <Input required={true}
-                                                               fullWidth={true}
-                                                               multiline={true}
-                                                               value={q.content} id={q.id}
-                                                               placeholder={"Please type Question # " + (index + 1)}
-                                                               onChange={this.handleQuestionChange}/>
+                                                        <Input
+                                                            style = {{color: 'whiteSmoke'}}
+                                                            required={true}
+                                                            fullWidth={true}
+                                                            multiline={true}
+                                                            value={q.content} id={q.id}
+                                                            placeholder={"Please type Question # " + (index + 1)}
+                                                            onChange={this.handleQuestionChange}/>
                                                     </div>
                                                 </div>
                                             }
@@ -366,14 +369,15 @@ class Questionnaire extends React.Component  {
                                                                 <input type={"checkbox"}/>
                                                                 <label></label>
                                                                 <Input value={option.type === 'Other' ? option.type : option.content} id={q.id}
-                                                                       style={{marginLeft: '5px', textAlign: 'center'}}
+                                                                       style={{marginLeft: '5px', textAlign: 'center', color: 'whitesmoke'}}
                                                                        type="text"
                                                                        multiline={true}
                                                                        readOnly = {option.type === 'Other'}
                                                                        placeholder={"Please type Option " + (index + 1)}
                                                                        onChange={(e) => this.handleOptionChange(e, option.no)}/>
-                                                                <Button style={{marginLeft: '10px'}}
-                                                                        variant={"outlined"}
+                                                                <Button style={{marginLeft: '10px', backgroundColor: 'orange'}}
+                                                                        variant={"contained"}
+                                                                        href="#contained-buttons"
                                                                         color={"secondary"} size={"small"} value={q.id}
                                                                         id={option.no} onClick={(e) => {
                                                                     this.handleDeleteOption(e, q.id, option.no)
@@ -387,11 +391,11 @@ class Questionnaire extends React.Component  {
                                         {this.state.form ? <div id={q.id} style={{marginTop: '20px'}}>
                                         </div> :
                                             <div id={q.id} style={{marginTop: '30px', marginBottom: '20px', display: 'inline-block'}}>
-                                                <Button size={"small"} variant="outlined" id={q.id} color={"secondary"}
+                                                <Button style = {{backgroundColor: 'red'}} size={"small"} variant="contained" id={q.id} color={"primary"}
                                                         onClick={(e) => {
                                                             this.handleDeleteQuestion(e, q.id)
                                                         }}>{"Delete Question # " + (index + 1)}</Button> {'          '}
-                                                <Button size={"small"} variant="outlined" id={q.id} color={"primary"}
+                                                <Button className = {"a"} style = {{userFocus: "all", backgroundColor: 'dodgerBlue'}} size={"small"} variant="contained" id={q.id} color={"primary"}
                                                     onClick={(e) => {
                                                         this.handleAddOption(e, q.id)
                                                     }}>ADD OPTION</Button>
@@ -404,7 +408,7 @@ class Questionnaire extends React.Component  {
                             )}
 
                             {this.state.form && this.state.view &&
-                            <div style={{textAlign: 'center', marginLeft: '20px', marginTop: '20px'}}>
+                            <div style={{textAlign: 'center', marginTop: '20px'}}>
                                 <Button variant="outlined" size={"large"} color={"primary"}
                                         onClick={this.handleReset}>
                                     Create Another Form
@@ -413,7 +417,7 @@ class Questionnaire extends React.Component  {
                             }
 
                             {this.state.form && !this.state.view &&
-                                <div style={{textAlign: 'center', marginLeft: '20px', marginTop: '20px'}}>
+                                <div style={{textAlign: 'center', marginTop: '20px'}}>
                                     <Button variant="contained" size={"large"} color={"primary"}
                                             onClick={this.handleGoBack}>
                                         Go back to Editing

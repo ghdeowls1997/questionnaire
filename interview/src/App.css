@@ -1,13 +1,21 @@
 .App {
   font-family: sans-serif;
   text-align: center;
-
+  color: whitesmoke;
 }
 
+Button:hover {
+  color: #b2dba1;
+}
+
+a:hover {
+  color: dodgerblue;
+}
 .header {
     font-family: Times New Roman, Times, serif;
     font-weight: 400;
     font-size: 30px;
+  user-focus: true;
 }
 html {
     width: 100%;
