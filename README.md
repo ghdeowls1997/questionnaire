@@ -1,15 +1,15 @@
 ## questionnaire
 Creating Google form
 
-## Basic Component Flow:
-# 1. Form Creating (For creator of the form)
-# 2. Filling out the Form (For user answering the form)
-# 3. View the submitted form (For both)   
-   # For two types of users:
-     #1. Form-creators: create forms that their clients (users) will be filling out
-     #2. Form-writers: will be filling out the form created by the creators with clickable buttons
+# Basic Component Flow:
+ 1. Form Creating (For creator of the form)
+ 2. Filling out the Form (For user answering the form)
+ 3. View the submitted form (For both)   
+   For two types of users:
+     1. Form-creators: create forms that their clients (users) will be filling out
+     2. Form-writers: will be filling out the form created by the creators with clickable buttons
      
-## Tech-Specification:
+# Tech-Specification:
        1) No backend server/framework created/used, but solely Frontend.
        
        2) Used React.js as a frontend library (Framework). 
