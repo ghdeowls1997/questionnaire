@@ -34,7 +34,6 @@ class Questionnaire extends React.Component  {
             form: false,
             questions: [],
             view: false,
-            transparency: false,
         }
     }
 
