@@ -60,22 +60,33 @@ class Questionnaire extends React.Component  {
             })
         } else {
             /** add sentinel object in front to retrieve question from the array easier
+             *  part of caching to retrieve question / option in O(1) time.
+             *
              * Do the same (sentinel pushing) for options array for same purpose
              * add 'Other' option upfront***/
-            let data = [question(null)]
-            data[0].deleted = true
-            data[0].options.push(option(null))
-            data[0].options[0].deleted = true;
-            let listOptions = [];
-            for (let i = 1; i <= 1; i++) {
-                data.push(question(i))
-                data[i].options.push(option(null))
-                data[i].options[0].deleted = true
-                data[i].options.push(option(i))
-                data[i].options.push(option(i + 1, 'Other'));
+
+                // generate a sample first question to be displayed at the very beginning
+            let data = [];
+            // generate a sentinel question
+            let sentinelQuestion = question(null);
+            sentinelQuestion.deleted = true;
+            //generate a sentinel option inside sentinel question
+            let sentinelOption = option(null);
+            sentinelOption.deleted = true;
+            sentinelQuestion.options.push(sentinelOption);
+            data.push(sentinelQuestion);
+            // controls the amount of initial questions to be displayed
+            const numQuestionsToBeInitialized = 1;
+            for (let i = 1; i <= numQuestionsToBeInitialized; i++) {
+                let q = question(i);
+                let sentOp = option(null);
+                sentOp.deleted = true;
+                q.options.push(sentOp);
+                q.options.push(option(i));
+                q.options.push(option(i + 1, 'Other'));
+                data.push(q);
             }
-            this.setState({questions: data, result: listOptions})
-            console.log(data);
+            this.setState({questions: data})
         }
     };
 
