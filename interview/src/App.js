@@ -42,7 +42,6 @@ class Questionnaire extends React.Component  {
             form: false,
             questions: [],
             view: false,
-            transparency: false,
         }
     }
 
@@ -69,21 +68,33 @@ class Questionnaire extends React.Component  {
             })
         } else {
             /** add sentinel object in front to retrieve question from the array easier
+             *  part of caching to retrieve question / option in O(1) time.
+             *
              * Do the same (sentinel pushing) for options array for same purpose
              * add 'Other' option upfront***/
-            let data = [question(null)]
-            data[0].deleted = true
-            data[0].options.push(option(null))
-            data[0].options[0].deleted = true;
-            let listOptions = [];
-            for (let i = 1; i <= 1; i++) {
-                data.push(question(i))
-                data[i].options.push(option(null))
-                data[i].options[0].deleted = true
-                data[i].options.push(option(i))
-                data[i].options.push(option(i + 1, 'Other'));
-                this.setState({questions: data, result: listOptions})
+
+            // generate a sample first question to be displayed at the very beginning
+            let data = [];
+            // generate a sentinel question
+            let sentinelQuestion = question(null);
+            sentinelQuestion.deleted = true;
+            //generate a sentinel option inside sentinel question
+            let sentinelOption = option(null);
+            sentinelOption.deleted = true;
+            sentinelQuestion.options.push(sentinelOption);
+            data.push(sentinelQuestion);
+            // controls the amount of initial questions to be displayed
+            const numQuestionsToBeInitialized = 1;
+            for (let i = 1; i <= numQuestionsToBeInitialized; i++) {
+                let q = question(i);
+                let sentOp = option(null);
+                sentOp.deleted = true;
+                q.options.push(sentOp);
+                q.options.push(option(i));
+                q.options.push(option(i + 1, 'Other'));
+                data.push(q);
             }
+            this.setState({questions: data})
         }
     };
 
@@ -106,7 +117,7 @@ class Questionnaire extends React.Component  {
         } else {
             questions[questionId].options.push(newOption);
             this.setState({questions: questions})
-        };
+        }
     };
 
     handleAddQuestion = () => {
@@ -214,7 +225,7 @@ class Questionnaire extends React.Component  {
         }
         alert("successfully created form");
         this.setState({form: true})
-    }
+    };
 
     handleSubmit = () => {
         /** alerts users when
@@ -244,10 +255,10 @@ class Questionnaire extends React.Component  {
             this.setState({view: true})
         } catch(e) {
             if (e === UnClickedButtonException) {
-                alert("Please choose an option for every question.")
+                alert("Please choose an option for every question.");
                 return ;
             } else if (e === OtherNotSpecifiedException) {
-                alert("If you have chosen 'Other' as an option, please specify.")
+                alert("If you have chosen 'Other' as an option, please specify.");
                 return ;
             }
         }
@@ -454,7 +465,7 @@ class Questionnaire extends React.Component  {
 
 
 
-// {/*//OPTIONS*/ My own hard-coding for the check button}
+// {/*//OPTIONS : My own hard-coding for the check button }
 // <div>
 //     {q.options && q.options.map(option => (
 //             option !== null && option.deleted === false &&
