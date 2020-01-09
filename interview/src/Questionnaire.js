@@ -51,7 +51,7 @@ class Questionnaire extends React.Component  {
          * */
         const questions = JSON.parse(sessionStorage.getItem("questions"));
         const form = JSON.parse(sessionStorage.getItem("form"));
-        const view = JSON.parse(sessionStorage.getItem("view"))
+        const view = JSON.parse(sessionStorage.getItem("view"));
         if (questions && questions !== []) {
             this.setState({
                 questions: questions,
