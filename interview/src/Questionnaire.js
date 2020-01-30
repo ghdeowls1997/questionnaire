@@ -65,7 +65,7 @@ class Questionnaire extends React.Component  {
              * Do the same (sentinel pushing) for options array for same purpose
              * add 'Other' option upfront***/
 
-                // generate a sample first question to be displayed at the very beginning
+            // generate a sample first question to be displayed at the very beginning
             let data = [];
             // generate a sentinel question
             let sentinelQuestion = question(null);
@@ -217,7 +217,7 @@ class Questionnaire extends React.Component  {
         }
         alert("successfully created form");
         this.setState({form: true})
-    }
+    };
 
     handleSubmit = () => {
         /** alerts users when
@@ -306,7 +306,7 @@ class Questionnaire extends React.Component  {
                         borderRadius: '20px',
                     }}>
                         <div>
-                            <h1 className={"header"}> Togg Form </h1><p style = {{fontFamily: 'Cambria', fontSize: '15px'}}> {"by _  " + "Daejin Hong"} </p>
+                            <h1 className={"header"}> Google Form </h1><p style = {{fontFamily: 'Cambria', fontSize: '15px'}}> {"by _  " + "Daejin Hong"} </p>
                             <hr style = {line("80%", "1")}></hr>
                             {this.state && this.state.questions && this.state.questions.filter(q => !q.deleted).map((q, index) => (
                                     <div>
